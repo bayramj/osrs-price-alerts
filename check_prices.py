@@ -8,7 +8,7 @@ STATE_FILE = Path("alert_state.json")
 
 TARGETS = {
     "Raw dark crab": 1100,
-    "Amethyst arrowtips": 250,
+    "Amethyst arrowtips": 240,
 }
 
 HEADERS = {
