@@ -5,7 +5,7 @@ import urllib.request
 DISCORD_WEBHOOK_URL = os.environ["DISCORD_WEBHOOK_URL"]
 
 TARGETS = {
-    "Raw dark crab": 1600,
+    "Raw dark crab": 1100,
     "Amethyst arrowtips": 250,
 }
 
@@ -31,7 +31,7 @@ for item_name, target_price in TARGETS.items():
 
     high = price_data.get("high")
     low = price_data.get("low")
-    current_price = high or low
+    current_price = low or high
 
     if current_price and current_price >= target_price:
         alerts.append(f"🚨 **{item_name}** is {current_price:,} gp — target is {target_price:,} gp")
