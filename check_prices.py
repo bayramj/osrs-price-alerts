@@ -7,7 +7,7 @@ DISCORD_WEBHOOK_URL = os.environ["DISCORD_WEBHOOK_URL"]
 STATE_FILE = Path("alert_state.json")
 
 TARGETS = {
-    "Raw dark crab": 1100,
+    "Raw dark crab": 110,
     "Amethyst arrowtips": 250,
 }
 
