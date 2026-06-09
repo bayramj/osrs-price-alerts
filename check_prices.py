@@ -7,7 +7,7 @@ DISCORD_WEBHOOK_URL = os.environ["DISCORD_WEBHOOK_URL"]
 STATE_FILE = Path("alert_state.json")
 
 TARGETS = {
-    "Raw dark crab": 110,
+    "Raw dark crab": 1100,
     "Amethyst arrowtips": 250,
 }
 
@@ -24,12 +24,17 @@ def get_json(url):
 
 def send_discord(message):
     payload = json.dumps({"content": message}).encode("utf-8")
+
     req = urllib.request.Request(
         DISCORD_WEBHOOK_URL,
         data=payload,
-        headers={"Content-Type": "application/json"},
+        headers={
+            "Content-Type": "application/json",
+            "User-Agent": "osrs-price-alert-bot/1.0",
+        },
         method="POST",
     )
+
     urllib.request.urlopen(req)
 
 
@@ -51,6 +56,8 @@ for item_name, target_price in TARGETS.items():
     sell_price = price_data.get("low") or price_data.get("high")
     was_above = state.get(item_name, False)
     is_above = sell_price is not None and sell_price >= target_price
+
+    print(f"{item_name}: sell price {sell_price}, target {target_price}")
 
     if is_above and not was_above:
         alerts.append(
